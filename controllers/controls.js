@@ -20,18 +20,23 @@ const alluser=(req,res)=>{
         res.send("no datas found...")
     })
 }
-const update = (req, res) => {
-    const id = req.body.id;
-    const username  = req.body.username;
-    const password=req.body.password;
-    const find =  entrydetails.findOne({ where: { id:id } })
-         entrydetails.update({ username:username }, { where: {id : id } })
-      .then(()=>{
-        res.send('updaed successfully');
-      })  
-    .catch((error)=>{
+const update =async (req, res) => {
+    const id = req.params.id;
+    const username  = req.params.username;
+    const imagefile=req.file
+    console.log(id);
+    console.log(username);
+    console.log(imagefile);
+    const find =await  entrydetails.findOne({ where: { id:id } })
+    console.log(find)
+    if(find){
+        entrydetails.update({ username:username,image:imagefile},{ where: {id : id } })
+        res.send(imagefile)
+    }
+      
+    else{
         res.send('error to update')
-    })
+    }
 } 
 const deletedata = (req,res)=>{
     const id=req.body.id;

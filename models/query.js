@@ -13,6 +13,9 @@ const entrydetail=sequelize.define('entrydetail',{
     password:{
         type:DataTypes.STRING,
         allowNull:false
+    },
+    image:{
+    type:DataTypes.STRING,
     }
           
 })
